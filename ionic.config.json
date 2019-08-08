@@ -1,5 +1,7 @@
 {
   "name": "APIMercado",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
