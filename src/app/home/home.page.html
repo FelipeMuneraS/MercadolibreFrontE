@@ -1,14 +1,66 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>
-      Ionic Blank
+      Felipe Múnera - Mercadolibre
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-item>
+  <ion-input no-border [(ngModel)]="query" (keyup.enter)="search()"></ion-input>
+  <ion-button size="default" fill="clear" shape="round" icon-only slot="end" (click)="search()">
+    <ion-icon class="ion-button" ios="ios-search" md="md-search"></ion-icon>
+  </ion-button>
+</ion-item>
 <ion-content>
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+    <ion-list *ngIf="items != null">
+      <ion-item-sliding *ngFor="let item of items">
+        <ion-card>
+          <ion-row>
+            <ion-col size="4">
+              <ion-card-header>
+                <ion-img alt="Loading..." [src]=item.thumbnail></ion-img>
+              </ion-card-header>
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-content>
+                <h2><strong>{{item.name}}</strong></h2>
+                <h3>${{item.price}}</h3>
+                <ion-skeleton-text animated *ngIf="item.sellerName == null"></ion-skeleton-text>
+                <h2 *ngIf="item.sellerName != null">{{item.sellerName}}</h2>
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-list *ngIf="skeleton == true">
+      <ion-item-sliding *ngFor="let number of [0,1,2]">
+        <ion-card>
+          <ion-row>
+            <ion-col size="4">
+              <ion-card-header style="height: 100%; padding: 5%; padding-bottom: 10%; padding-left: 10%;">
+                  <ion-skeleton-text style="height: 100%" animated></ion-skeleton-text>
+              </ion-card-header>
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-content>
+                <h2>
+                  <strong>
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                  </strong>
+                </h2>
+                <h3>
+                  <ion-skeleton-text style="width: 40%" animated></ion-skeleton-text>
+                </h3>
+                <h2>
+                  <ion-skeleton-text style="width: 70%" animated></ion-skeleton-text>
+                </h2>
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-item-sliding>
+    </ion-list>
   </div>
 </ion-content>
