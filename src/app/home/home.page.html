@@ -25,7 +25,7 @@
             <ion-col size="8">
               <ion-card-content>
                 <h2><strong>{{item.name}}</strong></h2>
-                <h3>${{item.price}}</h3>
+                <h3>{{item.price | currency: '' :  'symbol' : '1.0'}}</h3>
                 <ion-skeleton-text animated *ngIf="item.sellerName == null"></ion-skeleton-text>
                 <h2 *ngIf="item.sellerName != null">{{item.sellerName}}</h2>
               </ion-card-content>
@@ -35,7 +35,7 @@
       </ion-item-sliding>
     </ion-list>
     <ion-list *ngIf="skeleton == true">
-      <ion-item-sliding *ngFor="let number of [0,1,2]">
+      <ion-item-sliding *ngFor="let number of [0,1,2,3]">
         <ion-card>
           <ion-row>
             <ion-col size="4">
